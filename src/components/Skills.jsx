@@ -1,24 +1,28 @@
-const Skills = () => (
-  <section className="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>
-        <p>Programming Languages: Javascript</p>
-      </li>
-      <li>
-        <p>Frontend: HTML, CSS, SCSS, Tailwind, ReactJS</p>
-      </li>
-      <li>
-        <p>Backend: NodeJS</p>
-      </li>
-      <li>
+import { useState } from "react";
+import skills from "../data/skills";
+
+const Skills = () => {
+  const [skillsData, setSkillsData] = useState(skills);
+
+  const skillItems = skillsData.map((skill) => {
+    const skillTitle = skill.title;
+    const skillsText = skill.skills.join(", ");
+
+    return (
+      <li key={skillTitle}>
         <p>
-          Tools and Technologies: Git, Webpack, Vite, Jest, NPM, Yarn,
-          Powershell
+          {skillTitle}: {skillsText}
         </p>
       </li>
-    </ul>
-  </section>
-);
+    );
+  });
+
+  return (
+    <section className="skills">
+      <h2>Skills</h2>
+      <ul>{skillItems}</ul>
+    </section>
+  );
+};
 
 export default Skills;

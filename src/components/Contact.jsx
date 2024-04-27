@@ -1,21 +1,25 @@
+import { useState } from "react";
+import contact from "../data/contact";
 import "../styles/Contact.css";
 
 const Contact = () => {
-  const phoneNumber = "+91 6294 299 196";
-  const email = "snehamoybag69#gmail.com";
+  const [contactData, setContactData] = useState(contact);
+
+  const contactItems = Object.entries(contactData).map((entry) => {
+    const [key, value] = entry;
+
+    return (
+      <li key={key + value}>
+        {key}: {value}
+      </li>
+    );
+  });
 
   return (
-    <sectin className="contact">
+    <section className="contact">
       <h2>Contact</h2>
-      <ul className="contact__list">
-        <li>
-          <p>Phone Number: {phoneNumber}</p>
-        </li>
-        <li>
-          <p>Email: {email}</p>
-        </li>
-      </ul>
-    </sectin>
+      <ul className="contact__list">{contactItems}</ul>
+    </section>
   );
 };
 

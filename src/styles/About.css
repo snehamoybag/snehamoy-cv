@@ -1,3 +1,4 @@
-.about > p {
+.about__text {
   max-width: 45ch;
+  white-space: pre-wrap;
 }

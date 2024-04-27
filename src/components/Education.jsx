@@ -1,12 +1,35 @@
-const Education = () => (
-  <section className="education">
-    <h2>Education</h2>
-    <p>
-      Bachelor of Arts (Hons) in English Literature from Contai Prabhat Kumar
-      College, Vidyasagar University, West Bengal, India.
-    </p>
-    <p className="education__small-txt">2018 - 2021</p>
-  </section>
-);
+import education from "../data/education";
+
+const Education = () => {
+  const educationItems = education.map((item) => {
+    const {
+      degree,
+      subject,
+      college,
+      university,
+      location,
+      startYear,
+      endYear,
+    } = item;
+
+    return (
+      <li key={degree}>
+        <p>
+          {degree} in {subject} from {college}, {university}, {location}
+        </p>
+        <p className="small-text">
+          {startYear} - {endYear}
+        </p>
+      </li>
+    );
+  });
+
+  return (
+    <section className="education">
+      <h2>Education</h2>
+      <ul>{educationItems}</ul>
+    </section>
+  );
+};
 
 export default Education;

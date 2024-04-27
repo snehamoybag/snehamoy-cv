@@ -1,21 +1,28 @@
-const Experience = () => (
-  <section className="experience">
-    <h2>Experience</h2>
-    <ol>
-      <li>
-        <p>No experience</p>
-        <p className="util--small-txt">from 0000 to 0000</p>
+import { useState } from "react";
+import experience from "../data/experience";
+
+const Experience = () => {
+  const [experienceData, setExperienceData] = useState(experience);
+
+  const experienceItems = experienceData.map((experience) => {
+    const { job, startYear, endYear } = experience;
+
+    return (
+      <li key={job + startYear + endYear}>
+        <p>{job}</p>
+        <p className="small-text">
+          {startYear} to {endYear}
+        </p>
       </li>
-      <li>
-        <p>No experience</p>
-        <p className="util--small-txt">from 0000 to 0000</p>
-      </li>
-      <li>
-        <p>No experience</p>
-        <p className="util--small-txt">from 0000 to 0000</p>
-      </li>
-    </ol>
-  </section>
-);
+    );
+  });
+
+  return (
+    <section className="experience">
+      <h2>Experience</h2>
+      <ol>{experienceItems}</ol>
+    </section>
+  );
+};
 
 export default Experience;
