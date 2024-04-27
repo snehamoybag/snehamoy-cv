@@ -1,6 +1,5 @@
 .header {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   background-color: var(--clr-neutral-100);
 }
@@ -26,7 +25,18 @@
 }
 
 .header__img {
-  max-height: 320px;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 40em) {
+  .header {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .header__img {
+    width: initial;
+    max-height: 320px;
+  }
 }
