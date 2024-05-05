@@ -1,59 +1,58 @@
 import { useState } from "react";
-import initialAboutText from "../data/about";
+import initialAboutData from "../data/about";
 import "../styles/About.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 
 const About = () => {
-  const [aboutText, setAboutText] = useState(initialAboutText);
+  const [aboutData, setAboutData] = useState(initialAboutData);
 
-  const aboutParagraphs = aboutText
-    .split("\n")
+  const aboutParagraphEls = aboutData
     .filter((string) => string) // filter empty strings
-    .map((string) => <p key={string}>{string}</p>);
-
-  const [textareaValue, setTextareaValue] = useState(aboutText);
-
-  const handleTextareaChange = (event) => {
-    setTextareaValue(event.target.value);
-  };
+    .map((string, index) => <p key={index}>{string}</p>);
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const editModalFields = (
+  const toggleEditModalState = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
+
+  const [editValue, setEditValue] = useState(aboutData.join("\n"));
+
+  const handleEditInputChange = (event) => {
+    setEditValue(event.target.value);
+  };
+
+  const editModalInput = (
     <label htmlFor="about">
       <textarea
         name="about"
         id="about"
         cols="30"
         rows="10"
-        value={textareaValue}
-        onChange={handleTextareaChange}
+        value={editValue}
+        onChange={handleEditInputChange}
       />
     </label>
   );
 
   const handleFormSubmit = () => {
-    setAboutText(textareaValue);
-    setIsEditModalOpen(false); // remove modal
-  };
-
-  const handleCancel = () => {
-    setIsEditModalOpen(false); // remove modaal
+    setAboutData(editValue.split("\n"));
+    toggleEditModalState();
   };
 
   return (
     <section className="about">
-      {aboutParagraphs}
-      <EditButton handleClick={() => setIsEditModalOpen(!isEditModalOpen)} />
+      {aboutParagraphEls}
+      <EditButton handleClick={toggleEditModalState} />
       {isEditModalOpen && (
         <EditModal
           id="about-edit-modal"
           title="Edit About"
           handleFormSubmit={handleFormSubmit}
-          handleCancel={handleCancel}
+          handleCancel={toggleEditModalState}
         >
-          {editModalFields}
+          {editModalInput}
         </EditModal>
       )}
     </section>
