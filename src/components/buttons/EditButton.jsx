@@ -1,6 +1,6 @@
 const EditButton = ({ handleClick }) => {
   return (
-    <button className="btn--edit" onClick={handleClick}>
+    <button type="button" className="btn--edit" onClick={handleClick}>
       Edit
     </button>
   );
