@@ -2,6 +2,7 @@ import { useState } from "react";
 import initialExpData from "../data/experience";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
+import ExperienceEditField from "./ExperienceEditField";
 
 const Experience = () => {
   const [experienceData, setExperienceData] = useState(initialExpData);
@@ -39,38 +40,23 @@ const Experience = () => {
     const endYearId = "endYear_" + index;
 
     return (
-      <fieldset key={index}>
-        <label htmlFor={jobTitleId}>
-          Job Title:
-          <input
-            type="text"
-            name={jobTitleId}
-            id={jobTitleId}
-            value={job}
-            onChange={(e) => handleExpFieldChange(e, index, "job")}
-          />
-        </label>
-        <label htmlFor={startYearId}>
-          Start Year:
-          <input
-            type="text"
-            name={startYearId}
-            id={startYearId}
-            value={startYear}
-            onChange={(e) => handleExpFieldChange(e, index, "startYear")}
-          />
-        </label>
-        <label htmlFor={endYearId}>
-          End Year:
-          <input
-            type="text"
-            name={endYearId}
-            id={endYearId}
-            value={endYear}
-            onChange={(e) => handleExpFieldChange(e, index, "endYear")}
-          />
-        </label>
-      </fieldset>
+      <ExperienceEditField
+        key={index}
+        titleLabel={"Job title:"}
+        titleId={jobTitleId}
+        titleValue={job}
+        handleTitleChange={(e) => handleExpFieldChange(e, index, "job")}
+        startYearLabel={"Start year:"}
+        startYearId={startYearId}
+        startYearValue={startYear}
+        handleStartYearChange={(e) =>
+          handleExpFieldChange(e, index, "startYear")
+        }
+        endYearLabel={"End year:"}
+        endYearId={endYearId}
+        endYearValue={endYear}
+        handleEndYearChange={(e) => handleExpFieldChange(e, index, "endYear")}
+      />
     );
   });
 

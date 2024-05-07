@@ -3,6 +3,7 @@ import initialAboutData from "../data/about";
 import "../styles/About.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
+import AboutEditFields from "./AboutEditField";
 
 const About = () => {
   const [aboutData, setAboutData] = useState(initialAboutData);
@@ -17,27 +18,14 @@ const About = () => {
     setIsEditModalOpen(!isEditModalOpen);
   };
 
-  const [editValue, setEditValue] = useState(aboutData.join("\n"));
+  const [editFieldValue, setEditFieldValue] = useState(aboutData.join("\n"));
 
   const handleEditInputChange = (event) => {
-    setEditValue(event.target.value);
+    setEditFieldValue(event.target.value);
   };
 
-  const editModalInput = (
-    <label htmlFor="about">
-      <textarea
-        name="about"
-        id="about"
-        cols="30"
-        rows="10"
-        value={editValue}
-        onChange={handleEditInputChange}
-      />
-    </label>
-  );
-
   const handleFormSubmit = () => {
-    setAboutData(editValue.split("\n"));
+    setAboutData(editFieldValue.split("\n"));
     toggleEditModalState();
   };
 
@@ -52,7 +40,12 @@ const About = () => {
           handleFormSubmit={handleFormSubmit}
           handleCancel={toggleEditModalState}
         >
-          {editModalInput}
+          <AboutEditField
+            label={"(press 'Enter' to generate a new paragraph)"}
+            id="about-edit"
+            value={editFieldValue}
+            handleChange={handleEditInputChange}
+          />
         </EditModal>
       )}
     </section>

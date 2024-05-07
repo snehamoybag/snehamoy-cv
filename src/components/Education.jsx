@@ -2,6 +2,7 @@ import { useState } from "react";
 import initialEducationData from "../data/education";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
+import EducationEditField from "./EducationEditField";
 
 const Education = () => {
   const [educationData, setEducationData] = useState(initialEducationData);
@@ -36,39 +37,23 @@ const Education = () => {
     const endYearId = "endYear" + index;
 
     return (
-      <fieldset key={index}>
-        <label htmlFor={descriptionFieldId}>
-          Description:
-          <textarea
-            name={descriptionFieldId}
-            id={descriptionFieldId}
-            value={description}
-            onChange={(e) => handleEduFieldsChange(e, index, "description")}
-            cols="30"
-            rows="10"
-          />
-        </label>
-        <label htmlFor={startYearId}>
-          Start Year:
-          <input
-            type="text"
-            name={startYearId}
-            id={startYearId}
-            value={startYear}
-            onChange={(e) => handleEduFieldsChange(e, index, "startYear")}
-          />
-        </label>
-        <label htmlFor={endYearId}>
-          End Year:
-          <input
-            type="text"
-            name={endYearId}
-            id={endYearId}
-            value={endYear}
-            onChange={(e) => handleEduFieldsChange(e, index, "endYear")}
-          />
-        </label>
-      </fieldset>
+      <EducationEditField
+        key={index}
+        descLabel={"Description:"}
+        descId={descriptionFieldId}
+        descValue={description}
+        handleDescChange={(e) => handleEduFieldsChange(e, index, "description")}
+        startYearLabel={"Start year:"}
+        startYearId={startYearId}
+        startYearValue={startYear}
+        handleStartYearChagne={(e) =>
+          handleEduFieldsChange(e, index, "startYear")
+        }
+        endYearLabel={"End year:"}
+        endYearId={endYearId}
+        endYearValue={endYear}
+        handleEndYearChange={(e) => handleEduFieldsChange(e, index, "endYear")}
+      />
     );
   });
 

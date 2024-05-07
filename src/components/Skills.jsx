@@ -2,6 +2,7 @@ import { useState } from "react";
 import skills from "../data/skills";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
+import SkillsEditField from "./SkillsEditField";
 
 const Skills = () => {
   const [skillsData, setSkillsData] = useState(skills);
@@ -10,7 +11,7 @@ const Skills = () => {
     return (
       <li key={index}>
         <p>
-          {skill.title}: {skill.skills}
+          {skill.title}: {skill.description}
         </p>
       </li>
     );
@@ -31,33 +32,23 @@ const Skills = () => {
   };
 
   const skillsEditFields = editFieldsDData.map((skill, index) => {
+    const { title, description } = skill;
+
     const titleId = "skillTitle-" + index;
     const descId = "skillDesc-" + index;
 
     return (
-      <fieldset key={index}>
-        <label htmlFor={titleId}>
-          Skill type:
-          <input
-            type="text"
-            id={titleId}
-            name={titleId}
-            value={skill.title}
-            onChange={(e) => handleEditFieldChange(e, index, "title")}
-          />
-        </label>
-        <label htmlFor={descId}>
-          Skill description:
-          <textarea
-            name={descId}
-            id={descId}
-            value={skill.skills}
-            onChange={(e) => handleEditFieldChange(e, index, "skills")}
-            cols="30"
-            rows="10"
-          />
-        </label>
-      </fieldset>
+      <SkillsEditField
+        key={index}
+        titleLabel={"Skill type:"}
+        titleId={titleId}
+        titleValue={title}
+        handleTitleChange={(e) => handleEditFieldChange(e, index, "title")}
+        descLabel={"Skill description:"}
+        descId={descId}
+        descValue={description}
+        handleDescChange={(e) => handleEditFieldChange(e, index, "description")}
+      />
     );
   });
 

@@ -1,18 +1,18 @@
 export default [
   {
     title: "Programming Languages",
-    skills: "Javascript",
+    description: "Javascript",
   },
   {
     title: "Frontend",
-    skills: "HTML, CSS, ReactJS, SCSS/SASS, Tailwind",
+    description: "HTML, CSS, ReactJS, SCSS/SASS, Tailwind",
   },
   {
     title: "Backend",
-    skills: "NodeJS",
+    description: "NodeJS",
   },
   {
     title: "Tools & Technologies",
-    skills: "Git, Webpack, Vite, Jest, NPM, Yearn",
+    description: "Git, Webpack, Vite, Jest, NPM, Yearn",
   },
 ];

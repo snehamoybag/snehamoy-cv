@@ -3,6 +3,7 @@ import initialContactData from "../data/contact";
 import "../styles/Contact.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
+import ContactEditField from "./ContactEditField";
 
 const Contact = () => {
   const [contactData, setContactData] = useState(initialContactData);
@@ -34,28 +35,17 @@ const Contact = () => {
     const contactAddressInputId = `contact_field_${contact.address}_${index}`;
 
     return (
-      <fieldset key={index}>
-        <label htmlFor={contactTypeInputId}>
-          Contact Type:
-          <input
-            type="text"
-            id={contactTypeInputId}
-            name={contactTypeInputId}
-            value={contact.type}
-            onChange={(e) => handleInputChange(e, index, "type")}
-          />
-        </label>
-        <label htmlFor={contactAddressInputId}>
-          Contact Address:
-          <input
-            type="text"
-            id={contactAddressInputId}
-            name={contactAddressInputId}
-            value={contact.address}
-            onChange={(e) => handleInputChange(e, index, "address")}
-          />
-        </label>
-      </fieldset>
+      <ContactEditField
+        key={index}
+        typeLabel={"Contact type:"}
+        tyoeId={contactTypeInputId}
+        typeValue={contact.type}
+        handleTyoeChange={(e) => handleInputChange(e, index, "type")}
+        addressLabel={"Contact address:"}
+        addressId={contactAddressInputId}
+        addressValue={contact.address}
+        handleAddressChange={(e) => handleInputChange(e, index, "address")}
+      />
     );
   });
 
