@@ -4,6 +4,7 @@ import "../styles/Contact.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import ContactEditField from "./ContactEditField";
+import SectionHeading from "./SectionHeading";
 
 const Contact = () => {
   const [contactData, setContactData] = useState(initialContactData);
@@ -15,7 +16,7 @@ const Contact = () => {
   ));
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
+  const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
 
   const [editFieldsData, setEditFieldsData] = useState(contactData);
 
@@ -51,22 +52,22 @@ const Contact = () => {
 
   const handleFormSubmit = () => {
     setContactData(editFieldsData);
-    toggleEditModal();
+    toggleEditModalState();
   };
 
   return (
     <section className="contact">
-      <h2>
-        <span>Contact</span>
-        <EditButton handleClick={toggleEditModal} />
-      </h2>
+      <SectionHeading
+        title={"Contact"}
+        handleEditButtonClick={toggleEditModalState}
+      />
       <ul className="contact__list">{contactItems}</ul>
       {isEditModalOpen && (
         <EditModal
           id="edit-contact-modal"
           title="Edit Contact"
           handleFormSubmit={handleFormSubmit}
-          handleCancel={toggleEditModal}
+          handleCancel={toggleEditModalState}
         >
           {editFields}
         </EditModal>

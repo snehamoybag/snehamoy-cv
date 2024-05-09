@@ -3,6 +3,7 @@ import initialEducationData from "../data/education";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import EducationEditField from "./EducationEditField";
+import SectionHeading from "./SectionHeading";
 
 const Education = () => {
   const [educationData, setEducationData] = useState(initialEducationData);
@@ -67,9 +68,10 @@ const Education = () => {
 
   return (
     <section className="education">
-      <h2>
-        <span>Education</span> <EditButton handleClick={toggleEditModalState} />
-      </h2>
+      <SectionHeading
+        title={"Education"}
+        handleEditButtonClick={toggleEditModalState}
+      />
       <ul>{educationItems}</ul>
       {isEditModalOpen && (
         <EditModal

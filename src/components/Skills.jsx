@@ -3,6 +3,7 @@ import skills from "../data/skills";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import SkillsEditField from "./SkillsEditField";
+import SectionHeading from "./SectionHeading";
 
 const Skills = () => {
   const [skillsData, setSkillsData] = useState(skills);
@@ -62,10 +63,10 @@ const Skills = () => {
 
   return (
     <section className="skills">
-      <h2>
-        <span>Skills</span>
-        <EditButton handleClick={toggleEditModalState} />
-      </h2>
+      <SectionHeading
+        title={"Skills"}
+        handleEditButtonClick={toggleEditModalState}
+      />
       <ul>{skillItems}</ul>
       {isEditModalOpen && (
         <EditModal

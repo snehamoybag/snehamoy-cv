@@ -3,7 +3,7 @@ import initialAboutData from "../data/about";
 import "../styles/About.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
-import AboutEditFields from "./AboutEditField";
+import AboutEditField from "./AboutEditField";
 
 const About = () => {
   const [aboutData, setAboutData] = useState(initialAboutData);

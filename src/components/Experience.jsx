@@ -3,6 +3,7 @@ import initialExpData from "../data/experience";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import ExperienceEditField from "./ExperienceEditField";
+import SectionHeading from "./SectionHeading";
 
 const Experience = () => {
   const [experienceData, setExperienceData] = useState(initialExpData);
@@ -70,10 +71,10 @@ const Experience = () => {
 
   return (
     <section className="experience">
-      <h2>
-        <span>Experience</span>
-        <EditButton handleClick={toggleEditModalState} />
-      </h2>
+      <SectionHeading
+        title={"Experience"}
+        handleEditButtonClick={toggleEditModalState}
+      />
       <ol>{experienceItems}</ol>
       {isEditModalOpen && (
         <EditModal
