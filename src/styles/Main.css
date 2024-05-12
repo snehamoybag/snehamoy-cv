@@ -1,5 +1,5 @@
 .main {
-  padding: 2em;
+  padding: 3em 2.5em;
 }
 
 .main p {
@@ -11,4 +11,12 @@
 .main h2 {
   font-size: var(--fs-600);
   color: var(--clr-primary-400);
+}
+
+@media (min-width: 40em) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5em;
+  }
 }

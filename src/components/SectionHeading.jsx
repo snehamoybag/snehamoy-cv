@@ -1,4 +1,6 @@
 import EditButton from "./buttons/EditButton";
+import "../styles/SectionHeading.css";
+
 const SectionHeading = ({ title, handleEditButtonClick }) => (
   <div className="section-heading">
     <h2 className="section-heading__title">{title}</h2>

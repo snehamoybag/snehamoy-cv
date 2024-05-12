@@ -1,0 +1,7 @@
+.section-heading {
+  display: flex;
+  align-items: center;
+  column-gap: 2em;
+  row-gap: 1em;
+  margin-bottom: 1em;
+}

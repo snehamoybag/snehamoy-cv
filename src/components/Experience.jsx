@@ -5,6 +5,7 @@ import ExperienceEditField from "./ExperienceEditField";
 import SectionHeading from "./SectionHeading";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
 import deepCopy from "../utils/deepCopy";
+import "../styles/Experience.css";
 
 class ExperienceDataItem {
   constructor(job = "", startYear = "", endYear = "") {

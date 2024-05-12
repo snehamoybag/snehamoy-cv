@@ -13,7 +13,7 @@
   --fs-700: clamp(1rem, 0.5rem + 10vw, 3rem);
   --fs-600: clamp(0.85rem, 0.5rem + 7vw, 2rem);
   --fs-500: clamp(0.625rem, 0.5rem + 3vw, 1.5rem);
-  --fs-400: clamp(0.5rem, 0.5rem + 1.75vw, 1.25rem);
+  --fs-400: clamp(0.5rem, 0.5rem + 1.75vw, 1rem);
 
   --clr-primary-400: hsla(159, 100%, 42%, 1);
   --clr-primary-700: hsla(159, 100%, 1%, 1);
@@ -26,7 +26,7 @@
 .app {
   background-color: var(--clr-neutral-700);
   color: var(--clr-neutral-200);
-  max-width: 1440px;
+  max-width: 900px;
   min-height: 100vh; /* fallback if dvh doesn't work */
   min-height: 100dvh;
   font-family: var(--ff-primary);
