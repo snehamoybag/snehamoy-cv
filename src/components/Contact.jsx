@@ -1,37 +1,52 @@
 import { useState } from "react";
 import initialContactData from "../data/contact";
-import "../styles/Contact.css";
-import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import ContactEditField from "./ContactEditField";
 import SectionHeading from "./SectionHeading";
+import deepCopy from "../utils/deepCopy";
+import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
+import "../styles/Contact.css";
+
+class ContactDataItem {
+  constructor(type = "", address = "") {
+    this.type = type;
+    this.address = address;
+  }
+}
 
 const Contact = () => {
-  const [contactData, setContactData] = useState(initialContactData);
-
-  const contactItems = contactData.map((contact, index) => (
-    <li key={index}>
-      {contact.type}: {contact.address}
-    </li>
-  ));
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
 
-  const [editFieldsData, setEditFieldsData] = useState(contactData);
+  const [contactData, setContactData] = useState(initialContactData);
 
-  const handleInputChange = (event, index, contactPropertyName) => {
-    const copyOfPrevEditFieldsData = JSON.parse(JSON.stringify(editFieldsData));
+  const contactItems = contactData.map((contact, index) => {
+    const { type, address } = contact;
 
-    const editedContact = copyOfPrevEditFieldsData[index];
-    editedContact[contactPropertyName] = event.target.value;
+    return (
+      <li key={index}>
+        {type} : {address}
+      </li>
+    );
+  });
 
-    const newFieldsData = copyOfPrevEditFieldsData;
+  const [editFieldsData, setEditFieldsData] = useState(
+    initialContactData && initialContactData.length > 0
+      ? initialContactData
+      : [new ContactDataItem()],
+  );
 
-    setEditFieldsData(newFieldsData);
+  const handleEditFieldsChange = (event, index, propertyName) => {
+    const copyOfPrevEditFieldsData = deepCopy(editFieldsData);
+    const editedData = copyOfPrevEditFieldsData[index];
+
+    editedData[propertyName] = event.target.value;
+    const updatedEditFieldsData = copyOfPrevEditFieldsData;
+
+    setEditFieldsData(updatedEditFieldsData);
   };
 
-  const editFields = editFieldsData.map((contact, index) => {
+  const editFieldItems = editFieldsData.map((contact, index) => {
     const contactTypeInputId = `contact_field_${contact.type}_${index}`;
     const contactAddressInputId = `contact_field_${contact.address}_${index}`;
 
@@ -41,20 +56,42 @@ const Contact = () => {
         typeLabel={"Contact type:"}
         tyoeId={contactTypeInputId}
         typeValue={contact.type}
-        handleTyoeChange={(e) => handleInputChange(e, index, "type")}
+        handleTyoeChange={(e) => handleEditFieldsChange(e, index, "type")}
         addressLabel={"Contact address:"}
         addressId={contactAddressInputId}
         addressValue={contact.address}
-        handleAddressChange={(e) => handleInputChange(e, index, "address")}
+        handleAddressChange={(e) => handleEditFieldsChange(e, index, "address")}
       />
     );
   });
 
+  const handleAddMore = () => {
+    const copyOfPrevEditFieldsData = deepCopy(editFieldsData);
+
+    copyOfPrevEditFieldsData.push(new ContactDataItem());
+
+    const updatedEditFieldsData = copyOfPrevEditFieldsData;
+    setEditFieldsData(updatedEditFieldsData);
+  };
+
   const handleFormSubmit = () => {
-    setContactData(editFieldsData);
+    const copyOfPrevEditFiledsData = deepCopy(editFieldsData);
+
+    const nonEmptyDataItems = getNonEmptyDataItems(copyOfPrevEditFiledsData);
+
+    setContactData(nonEmptyDataItems);
+    setEditFieldsData(nonEmptyDataItems);
     toggleEditModalState();
   };
 
+  const handleFormCancel = () => {
+    const copyOfContactData = deepCopy(contactData);
+
+    setEditFieldsData(copyOfContactData);
+    toggleEditModalState();
+  };
+
+  // contact component
   return (
     <section className="contact">
       <SectionHeading
@@ -67,9 +104,10 @@ const Contact = () => {
           id="edit-contact-modal"
           title="Edit Contact"
           handleFormSubmit={handleFormSubmit}
-          handleCancel={toggleEditModalState}
+          handleCancel={handleFormCancel}
+          handleAddMore={handleAddMore}
         >
-          {editFields}
+          {editFieldItems}
         </EditModal>
       )}
     </section>

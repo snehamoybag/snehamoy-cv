@@ -1,11 +1,23 @@
 import { useState } from "react";
 import initialExpData from "../data/experience";
-import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import ExperienceEditField from "./ExperienceEditField";
 import SectionHeading from "./SectionHeading";
+import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
+import deepCopy from "../utils/deepCopy";
+
+class ExperienceDataItem {
+  constructor(job = "", startYear = "", endYear = "") {
+    this.job = job;
+    this.startYear = startYear;
+    this.endYear = endYear;
+  }
+}
 
 const Experience = () => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
+
   const [experienceData, setExperienceData] = useState(initialExpData);
 
   const experienceItems = experienceData.map((experience) => {
@@ -21,10 +33,14 @@ const Experience = () => {
     );
   });
 
-  const [expFieldsData, setExpFieldsData] = useState(experienceData);
+  const [expFieldsData, setExpFieldsData] = useState(
+    initialExpData && initialExpData.length > 0
+      ? initialExpData
+      : [new ExperienceDataItem()],
+  );
 
   const handleExpFieldChange = (event, index, propertyName) => {
-    const copyOfPrevFieldsData = JSON.parse(JSON.stringify(expFieldsData));
+    const copyOfPrevFieldsData = deepCopy(expFieldsData);
 
     const editedData = copyOfPrevFieldsData[index];
     editedData[propertyName] = event.target.value;
@@ -61,14 +77,32 @@ const Experience = () => {
     );
   });
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
+  const handleAddMore = () => {
+    const copyOfPrevExpFieldsData = deepCopy(expFieldsData);
 
-  const handleEditModalFormSubmit = () => {
-    setExperienceData(expFieldsData);
+    copyOfPrevExpFieldsData.push(new ExperienceDataItem());
+
+    const updatedFieldsData = copyOfPrevExpFieldsData;
+    setExpFieldsData(updatedFieldsData);
+  };
+
+  const hanldeEditFormSubmit = () => {
+    const copyOfExpFieldsData = deepCopy(expFieldsData);
+    const nonEmptyExpFieldData = getNonEmptyDataItems(copyOfExpFieldsData);
+
+    setExperienceData(nonEmptyExpFieldData);
+    setExpFieldsData(nonEmptyExpFieldData);
     toggleEditModalState();
   };
 
+  const handleEditFormCancel = () => {
+    const copyOfExpData = deepCopy(experienceData);
+
+    setExpFieldsData(copyOfExpData);
+    toggleEditModalState();
+  };
+
+  // Experience component
   return (
     <section className="experience">
       <SectionHeading
@@ -80,8 +114,9 @@ const Experience = () => {
         <EditModal
           id="experience-edit-modal"
           title="Edit Experience"
-          handleFormSubmit={handleEditModalFormSubmit}
-          handleCancel={toggleEditModalState}
+          hanldeFormSubmit={hanldeEditFormSubmit}
+          handleCancel={handleEditFormCancel}
+          handleAddMore={handleAddMore}
         >
           {editModalFields}
         </EditModal>

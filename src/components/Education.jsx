@@ -1,26 +1,42 @@
 import { useState } from "react";
 import initialEducationData from "../data/education";
-import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import EducationEditField from "./EducationEditField";
 import SectionHeading from "./SectionHeading";
+import deepCopy from "../utils/deepCopy";
+import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
+
+class EducationDataItem {
+  constructor(description = "", startYear = "", endYear = "") {
+    this.description = description;
+    this.startYear = startYear;
+    this.endYear = endYear;
+  }
+}
 
 const Education = () => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
+
   const [educationData, setEducationData] = useState(initialEducationData);
 
   const educationItems = educationData.map((eduItem, index) => (
     <div className="education__wrapper" key={index}>
       <p>{eduItem.description}</p>
       <p className="text---small">
-        {eduItem.startYear} - {eduItem.endYear}
+        {eduItem.startYear} - {eduItem.endYear || "present"}
       </p>
     </div>
   ));
 
-  const [eduFieldsData, setEduFieldsData] = useState(educationData);
+  const [eduFieldsData, setEduFieldsData] = useState(
+    initialEducationData && initialEducationData.length > 0
+      ? initialEducationData
+      : [new EducationDataItem()],
+  );
 
   const handleEduFieldsChange = (event, index, eduPropertyName) => {
-    const copyOfPrevEduFieldsData = JSON.parse(JSON.stringify(eduFieldsData));
+    const copyOfPrevEduFieldsData = deepCopy(eduFieldsData);
 
     const editedEduItem = copyOfPrevEduFieldsData[index];
     editedEduItem[eduPropertyName] = event.target.value;
@@ -58,11 +74,28 @@ const Education = () => {
     );
   });
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const toggleEditModalState = () => setIsEditModalOpen(!isEditModalOpen);
+  const handleAddMore = () => {
+    const copyOfPrevEduFieldsData = deepCopy(eduFieldsData);
+
+    copyOfPrevEduFieldsData.push(new EducationDataItem());
+
+    const updatedFieldsData = copyOfPrevEduFieldsData;
+    setEduFieldsData(updatedFieldsData);
+  };
 
   const handleFormSubmit = () => {
-    setEducationData(eduFieldsData);
+    const copyOfPrevEduFieldsData = deepCopy(eduFieldsData);
+    const nonEmptyEduFieldsData = getNonEmptyDataItems(copyOfPrevEduFieldsData);
+
+    setEduFieldsData(nonEmptyEduFieldsData);
+    setEducationData(nonEmptyEduFieldsData);
+    toggleEditModalState();
+  };
+
+  const handleFormCancel = () => {
+    const copyOfPrevEducationData = deepCopy(educationData);
+
+    setEduFieldsData(copyOfPrevEducationData);
     toggleEditModalState();
   };
 
@@ -78,7 +111,8 @@ const Education = () => {
           id="education-edit-modal"
           title="Edit Education"
           handleFormSubmit={handleFormSubmit}
-          handleCancel={toggleEditModalState}
+          handleCancel={handleFormCancel}
+          handleAddMore={handleAddMore}
         >
           {editModalFields}
         </EditModal>
