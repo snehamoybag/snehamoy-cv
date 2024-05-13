@@ -25,7 +25,7 @@ const Experience = () => {
     const { job, startYear, endYear } = experience;
 
     return (
-      <li key={job + startYear + endYear}>
+      <li key={job + startYear + endYear} className="experience__list-item">
         <p>{job}</p>
         <p className="small-text">
           {startYear} to {endYear}
@@ -110,12 +110,12 @@ const Experience = () => {
         title={"Experience"}
         handleEditButtonClick={toggleEditModalState}
       />
-      <ol>{experienceItems}</ol>
+      <ol className="experience__list">{experienceItems}</ol>
       {isEditModalOpen && (
         <EditModal
           id="experience-edit-modal"
           title="Edit Experience"
-          hanldeFormSubmit={hanldeEditFormSubmit}
+          handleFormSubmit={hanldeEditFormSubmit}
           handleCancel={handleEditFormCancel}
           handleAddMore={handleAddMore}
         >
