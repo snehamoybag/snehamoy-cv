@@ -41,7 +41,7 @@ const About = () => {
           handleCancel={toggleEditModalState}
         >
           <AboutEditField
-            label={"(press 'Enter' to generate a new paragraph)"}
+            label={"(type after a new line to render a new paragrah)"}
             id="about-edit"
             value={editFieldValue}
             handleChange={handleEditInputChange}

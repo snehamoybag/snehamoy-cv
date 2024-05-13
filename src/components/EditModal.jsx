@@ -11,7 +11,13 @@ const EditModal = ({
   handleAddMore,
   children,
 }) => {
-  const isChildrenAvailable = children && children.length > 0;
+  let isChildrenAvailable = false;
+
+  if (Array.isArray(children) && children.length > 0) {
+    isChildrenAvailable = true;
+  } else if (!Array.isArray(children)) {
+    isChildrenAvailable = Boolean(children);
+  }
 
   return (
     <>
