@@ -5,7 +5,7 @@ import ContactEditField from "./ContactEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
-import "../styles/Contact.css";
+import "../styles/contact.css";
 
 class ContactDataItem {
   constructor(type = "", address = "") {
@@ -22,10 +22,21 @@ const Contact = () => {
 
   const contactItems = contactData.map((contact, index) => {
     const { type, address } = contact;
+    let iconClassName = "icon-default";
+
+    if (type.startsWith("phone") || type.startsWith("Phone")) {
+      iconClassName = "icon-phone";
+    } else if (type.startsWith("email") || type.startsWith("Email")) {
+      iconClassName = "icon-email";
+    }
+
+    const listItemClassName = `contact__list-item ${iconClassName}`;
 
     return (
-      <li key={index}>
-        {type} : {address}
+      <li key={index} className={listItemClassName}>
+        <p>
+          {type} : <span className="spaced-chars">{address}</span>
+        </p>
       </li>
     );
   });

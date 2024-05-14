@@ -1,7 +1,7 @@
 import FormSubmitButton from "./buttons/FormSubmitButton";
 import FormCancelButton from "./buttons/FormCancelButton";
 import AddMoreButton from "./buttons/AddMoreButton";
-import "../styles/EditModal.css";
+import "../styles/edit-modal.css";
 
 const EditModal = ({
   id,

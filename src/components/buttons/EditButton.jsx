@@ -1,7 +1,7 @@
-const EditButton = ({ handleClick }) => {
+const EditButton = ({ text = "Edit", handleClick }) => {
   return (
     <button type="button" className="btn--edit" onClick={handleClick}>
-      Edit
+      <span className="sr-only">{text}</span>
     </button>
   );
 };

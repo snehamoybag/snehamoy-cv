@@ -5,6 +5,7 @@ import SkillsEditField from "./SkillsEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
+import "../styles/skills.css";
 
 class SkillsDataItem {
   constructor(title = "", description = "") {
@@ -21,7 +22,7 @@ const Skills = () => {
 
   const skillItems = skillsData.map((skill, index) => {
     return (
-      <li key={index}>
+      <li key={index} className="skills__list-item">
         <p>
           {skill.title}: {skill.description}
         </p>
@@ -97,7 +98,7 @@ const Skills = () => {
         title={"Skills"}
         handleEditButtonClick={toggleEditModalState}
       />
-      <ul>{skillItems}</ul>
+      <ul className="skills__list">{skillItems}</ul>
       {isEditModalOpen && (
         <EditModal
           id="skills-edit-modal"

@@ -1,4 +1,6 @@
 .main {
+  display: grid;
+  gap: 2.5em;
   padding: 3em 2.5em;
 }
 
@@ -15,8 +17,6 @@
 
 @media (min-width: 40em) {
   .main {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5em;
   }
 }

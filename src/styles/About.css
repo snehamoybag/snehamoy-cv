@@ -1,0 +1,7 @@
+.about__paragraph {
+  margin-top: 0.5em;
+}
+
+.about__paragraph:first-of-type {
+  margin-top: 0;
+}

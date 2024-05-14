@@ -1,16 +1,20 @@
 import { useState } from "react";
 import initialAboutData from "../data/about";
-import "../styles/About.css";
 import EditButton from "./buttons/EditButton";
 import EditModal from "./EditModal";
 import AboutEditField from "./AboutEditField";
+import "../styles/about.css";
 
 const About = () => {
   const [aboutData, setAboutData] = useState(initialAboutData);
 
   const aboutParagraphEls = aboutData
     .filter((string) => string) // filter empty strings
-    .map((string, index) => <p key={index}>{string}</p>);
+    .map((string, index) => (
+      <p key={index} className="about__paragraph">
+        {string}
+      </p>
+    ));
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -41,7 +45,7 @@ const About = () => {
           handleCancel={toggleEditModalState}
         >
           <AboutEditField
-            label={"(type after a new line to render a new paragrah)"}
+            label={"(type after a new line to render a new paragraph)"}
             id="about-edit"
             value={editFieldValue}
             handleChange={handleEditInputChange}

@@ -3,7 +3,7 @@ import Contact from "./Contact";
 import Education from "./Education";
 import Experience from "./Experience";
 import Skills from "./Skills";
-import "../styles/Main.css";
+import "../styles/main.css";
 
 const Main = () => {
   return (

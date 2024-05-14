@@ -1,5 +1,5 @@
 import profilePhoto from "../assets/snehamoy-dp.jpg";
-import "../styles/Header.css";
+import "../styles/header.css";
 
 const Header = () => (
   <header className="header">
