@@ -30,10 +30,13 @@ const Skills = () => {
     );
   });
 
-  const [editFieldsData, setEditFieldsData] = useState(
+  const editFieldsDefaultDataValue =
     initialSkillsData && initialSkillsData.length > 0
       ? initialSkillsData
-      : [new SkillsDataItem()],
+      : [new SkillsDataItem()];
+
+  const [editFieldsData, setEditFieldsData] = useState(
+    editFieldsDefaultDataValue,
   );
 
   const handleEditFieldChange = (event, index, propertyName) => {
@@ -92,11 +95,17 @@ const Skills = () => {
     toggleEditModalState();
   };
 
+  const handleContentReset = () => {
+    setSkillsData(initialSkillsData);
+    setEditFieldsData(editFieldsDefaultDataValue);
+  };
+
   return (
     <section className="skills">
       <SectionHeading
         title={"Skills"}
         handleEditButtonClick={toggleEditModalState}
+        handleResetButtonClick={handleContentReset}
       />
       <ul className="skills__list">{skillItems}</ul>
       {isEditModalOpen && (

@@ -4,34 +4,43 @@ import EditButton from "./buttons/EditButton";
 import ResetButton from "./buttons/ResetButton";
 import EditModal from "./EditModal";
 import AboutEditField from "./AboutEditField";
+import removeEmptyStrings from "../utils/removeEmptyStrings";
 import "../styles/about.css";
 
 const About = () => {
-  const [aboutData, setAboutData] = useState(initialAboutData);
-
-  const aboutParagraphEls = aboutData
-    .filter((string) => string) // filter empty strings
-    .map((string, index) => (
-      <p key={index} className="about__paragraph">
-        {string}
-      </p>
-    ));
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const toggleEditModalState = () => {
     setIsEditModalOpen(!isEditModalOpen);
   };
 
-  const [editFieldValue, setEditFieldValue] = useState(aboutData.join("\n"));
+  const defaultValeOfAboutData = removeEmptyStrings(initialAboutData);
+  const [aboutData, setAboutData] = useState(defaultValeOfAboutData);
+
+  const aboutParagraphEls = aboutData.map((string, index) => (
+    <p key={index} className="about__paragraph">
+      {string}
+    </p>
+  ));
+
+  const defautEditFieldValue = initialAboutData.join("\n");
+  const [editFieldValue, setEditFieldValue] = useState(defautEditFieldValue);
 
   const handleEditInputChange = (event) => {
     setEditFieldValue(event.target.value);
   };
 
   const handleFormSubmit = () => {
-    setAboutData(editFieldValue.split("\n"));
+    const arrOfParagraphs = removeEmptyStrings(editFieldValue.split("\n"));
+
+    setAboutData(arrOfParagraphs);
+    setEditFieldValue(arrOfParagraphs.join("\n")); // to match with rendered data
     toggleEditModalState();
+  };
+
+  const handleContentReset = () => {
+    setAboutData(defaultValeOfAboutData);
+    setEditFieldValue(defautEditFieldValue);
   };
 
   return (
@@ -39,7 +48,7 @@ const About = () => {
       {aboutParagraphEls}
       <div className="about__buttons-wrapper">
         <EditButton handleClick={toggleEditModalState} />
-        <ResetButton />
+        <ResetButton handleClick={handleContentReset} />
       </div>
       {isEditModalOpen && (
         <EditModal

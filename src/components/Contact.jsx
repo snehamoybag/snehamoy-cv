@@ -41,10 +41,13 @@ const Contact = () => {
     );
   });
 
-  const [editFieldsData, setEditFieldsData] = useState(
+  const editFieldsDefaultDataValue =
     initialContactData && initialContactData.length > 0
       ? initialContactData
-      : [new ContactDataItem()],
+      : [new ContactDataItem()];
+
+  const [editFieldsData, setEditFieldsData] = useState(
+    editFieldsDefaultDataValue,
   );
 
   const handleEditFieldsChange = (event, index, propertyName) => {
@@ -102,12 +105,18 @@ const Contact = () => {
     toggleEditModalState();
   };
 
+  const handleContentReset = () => {
+    setContactData(initialContactData);
+    setEditFieldsData(editFieldsDefaultDataValue);
+  };
+
   // contact component
   return (
     <section className="contact">
       <SectionHeading
         title={"Contact"}
         handleEditButtonClick={toggleEditModalState}
+        handleResetButtonClick={handleContentReset}
       />
       <ul className="contact__list">{contactItems}</ul>
       {isEditModalOpen && (

@@ -29,11 +29,12 @@ const Education = () => {
     </div>
   ));
 
-  const [eduFieldsData, setEduFieldsData] = useState(
+  const eduFieldsDefaultDataValue =
     initialEducationData && initialEducationData.length > 0
       ? initialEducationData
-      : [new EducationDataItem()],
-  );
+      : [new EducationDataItem()];
+
+  const [eduFieldsData, setEduFieldsData] = useState(eduFieldsDefaultDataValue);
 
   const handleEduFieldsChange = (event, index, eduPropertyName) => {
     const copyOfPrevEduFieldsData = deepCopy(eduFieldsData);
@@ -99,11 +100,17 @@ const Education = () => {
     toggleEditModalState();
   };
 
+  const handleContentReset = () => {
+    setEducationData(initialEducationData);
+    setEduFieldsData(eduFieldsDefaultDataValue);
+  };
+
   return (
     <section className="education">
       <SectionHeading
         title={"Education"}
         handleEditButtonClick={toggleEditModalState}
+        handleResetButtonClick={handleContentReset}
       />
       <ul>{educationItems}</ul>
       {isEditModalOpen && (

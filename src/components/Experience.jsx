@@ -34,11 +34,12 @@ const Experience = () => {
     );
   });
 
-  const [expFieldsData, setExpFieldsData] = useState(
+  const expFieldsDefaultDataValue =
     initialExpData && initialExpData.length > 0
       ? initialExpData
-      : [new ExperienceDataItem()],
-  );
+      : [new ExperienceDataItem()];
+
+  const [expFieldsData, setExpFieldsData] = useState(expFieldsDefaultDataValue);
 
   const handleExpFieldChange = (event, index, propertyName) => {
     const copyOfPrevFieldsData = deepCopy(expFieldsData);
@@ -103,12 +104,18 @@ const Experience = () => {
     toggleEditModalState();
   };
 
+  const handleContentReset = () => {
+    setExperienceData(initialExpData);
+    setExpFieldsData(expFieldsDefaultDataValue);
+  };
+
   // Experience component
   return (
     <section className="experience">
       <SectionHeading
         title={"Experience"}
         handleEditButtonClick={toggleEditModalState}
+        handleResetButtonClick={handleContentReset}
       />
       <ol className="experience__list">{experienceItems}</ol>
       {isEditModalOpen && (
