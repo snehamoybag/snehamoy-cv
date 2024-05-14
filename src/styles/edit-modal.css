@@ -31,6 +31,10 @@
   border-bottom: 2px solid var(--clr-primary-400);
 }
 
+.edit-modal__empty-content {
+  padding: 2em 1em;
+}
+
 .edit-modal__form {
   padding: 0 2em;
 }

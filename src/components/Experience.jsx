@@ -6,6 +6,7 @@ import SectionHeading from "./SectionHeading";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
 import deepCopy from "../utils/deepCopy";
 import "../styles/experience.css";
+import "../styles/txt.css";
 
 class ExperienceDataItem {
   constructor(job = "", startYear = "", endYear = "") {
@@ -27,7 +28,7 @@ const Experience = () => {
     return (
       <li key={job + startYear + endYear} className="experience__list-item">
         <p>{job}</p>
-        <p className="small-text">
+        <p className="txt txt--small">
           {startYear} to {endYear}
         </p>
       </li>

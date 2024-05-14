@@ -5,6 +5,8 @@ import EducationEditField from "./EducationEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
+import "../styles/education.css";
+import "../styles/txt.css";
 
 class EducationDataItem {
   constructor(description = "", startYear = "", endYear = "") {
@@ -21,9 +23,9 @@ const Education = () => {
   const [educationData, setEducationData] = useState(initialEducationData);
 
   const educationItems = educationData.map((eduItem, index) => (
-    <div className="education__wrapper" key={index}>
+    <div className="education__text-wrapper" key={index}>
       <p>{eduItem.description}</p>
-      <p className="text---small">
+      <p className="txt txt--small">
         {eduItem.startYear} - {eduItem.endYear || "present"}
       </p>
     </div>

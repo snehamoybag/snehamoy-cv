@@ -2,6 +2,7 @@ import FormSubmitButton from "./buttons/FormSubmitButton";
 import FormCancelButton from "./buttons/FormCancelButton";
 import AddMoreButton from "./buttons/AddMoreButton";
 import "../styles/edit-modal.css";
+import "../styles/txt.css";
 
 const EditModal = ({
   id,
@@ -28,8 +29,8 @@ const EditModal = ({
           {isChildrenAvailable ? (
             children
           ) : (
-            <p>
-              <span className="text--big">Error 404</span>: No contents to edit
+            <p className="edit-modal__empty-content txt txt--big">
+              Error 404: no contents to edit!
             </p>
           )}
         </form>
