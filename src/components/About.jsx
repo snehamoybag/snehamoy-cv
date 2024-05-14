@@ -1,6 +1,7 @@
 import { useState } from "react";
 import initialAboutData from "../data/about";
 import EditButton from "./buttons/EditButton";
+import ResetButton from "./buttons/ResetButton";
 import EditModal from "./EditModal";
 import AboutEditField from "./AboutEditField";
 import "../styles/about.css";
@@ -36,7 +37,10 @@ const About = () => {
   return (
     <section className="about">
       {aboutParagraphEls}
-      <EditButton handleClick={toggleEditModalState} />
+      <div className="about__buttons-wrapper">
+        <EditButton handleClick={toggleEditModalState} />
+        <ResetButton />
+      </div>
       {isEditModalOpen && (
         <EditModal
           id="about-edit-modal"

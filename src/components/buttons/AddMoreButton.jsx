@@ -1,4 +1,6 @@
-const AddMoreButton = ({ text = "+ Add more...", handleClick }) => (
+import "../../styles/btn.css";
+
+const AddMoreButton = ({ text = "Add more...", handleClick }) => (
   <button className="btn btn--add-more" onClick={handleClick}>
     {text}
   </button>

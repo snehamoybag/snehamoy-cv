@@ -5,3 +5,9 @@
 .about__paragraph:first-of-type {
   margin-top: 0;
 }
+
+.about__buttons-wrapper {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
