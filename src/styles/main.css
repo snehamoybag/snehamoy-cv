@@ -1,0 +1,22 @@
+.main {
+  display: grid;
+  gap: 2.5em;
+  padding: 3em 2.5em;
+}
+
+.main p {
+  max-width: 55ch;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.main h2 {
+  font-size: var(--fs-600);
+  color: var(--clr-primary-400);
+}
+
+@media (min-width: 40em) {
+  .main {
+    grid-template-columns: 1fr 1fr;
+  }
+}

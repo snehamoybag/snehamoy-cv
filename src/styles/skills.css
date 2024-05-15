@@ -1,0 +1,13 @@
+.skills__list {
+  list-style-position: inside;
+}
+
+.skills__list-item {
+  color: var(--clr-primary-400); /* for list bullets color */
+  margin-top: 0.25em;
+}
+
+.skills__list-item > p {
+  color: var(--clr-neutral-200);
+  display: inline;
+}

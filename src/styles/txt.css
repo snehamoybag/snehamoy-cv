@@ -1,0 +1,7 @@
+.txt--small {
+  font-size: var(--fs-200);
+}
+
+.txt--big {
+  font-size: var(--fs-600);
+}
