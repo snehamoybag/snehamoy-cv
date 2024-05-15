@@ -1,6 +1,6 @@
 import EditButton from "./buttons/EditButton";
 import ResetButton from "./buttons/ResetButton";
-import "../styles/section-heading.css";
+import "/src/styles/section-heading.css";
 
 const SectionHeading = ({
   title,

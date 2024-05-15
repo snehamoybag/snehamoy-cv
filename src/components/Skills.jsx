@@ -5,7 +5,7 @@ import SkillsEditField from "./SkillsEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
-import "../styles/skills.css";
+import "/src/styles/skills.css";
 
 class SkillsDataItem {
   constructor(title = "", description = "") {

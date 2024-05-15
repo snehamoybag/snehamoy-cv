@@ -5,7 +5,7 @@ import ResetButton from "./buttons/ResetButton";
 import EditModal from "./EditModal";
 import AboutEditField from "./AboutEditField";
 import removeEmptyStrings from "../utils/removeEmptyStrings";
-import "../styles/about.css";
+import "/src/styles/about.css";
 
 const About = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

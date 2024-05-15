@@ -5,8 +5,8 @@ import EducationEditField from "./EducationEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
-import "../styles/education.css";
-import "../styles/txt.css";
+import "/src/styles/education.css";
+import "/src/styles/txt.css";
 
 class EducationDataItem {
   constructor(description = "", startYear = "", endYear = "") {

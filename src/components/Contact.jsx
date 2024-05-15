@@ -5,7 +5,7 @@ import ContactEditField from "./ContactEditField";
 import SectionHeading from "./SectionHeading";
 import deepCopy from "../utils/deepCopy";
 import getNonEmptyDataItems from "../utils/getNonEmptyDataItems";
-import "../styles/contact.css";
+import "/src/styles/contact.css";
 
 class ContactDataItem {
   constructor(type = "", address = "") {
